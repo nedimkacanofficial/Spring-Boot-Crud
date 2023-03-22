@@ -2,12 +2,14 @@ package com.ndmkcn.chaddarby4.mapper;
 
 import com.ndmkcn.chaddarby4.dto.EmployeeDTO;
 import com.ndmkcn.chaddarby4.entity.Employee;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class EmployeeMapper {
-    public static EmployeeDTO entityToDTO(Employee employee){
+    public EmployeeDTO entityToDTO(Employee employee){
         EmployeeDTO employeeDTO=new EmployeeDTO();
         employeeDTO.setId(employee.getId());
         employeeDTO.setFirstName(employee.getFirstName());
@@ -15,7 +17,7 @@ public class EmployeeMapper {
         employeeDTO.setEmail(employee.getEmail());
         return employeeDTO;
     }
-    public static Employee dtoToEntity(EmployeeDTO employeeDTO){
+    public Employee dtoToEntity(EmployeeDTO employeeDTO){
         Employee employee=new Employee();
         employee.setId(employeeDTO.getId());
         employee.setFirstName(employeeDTO.getFirstName());
@@ -23,7 +25,7 @@ public class EmployeeMapper {
         employee.setEmail(employeeDTO.getEmail());
         return employee;
     }
-    public static List<EmployeeDTO> entityToDTOList(List<Employee> employees){
+    public List<EmployeeDTO> entityToDTOList(List<Employee> employees){
         List<EmployeeDTO> employeeDTOS=new ArrayList<>();
         for (Employee employee:employees) {
             EmployeeDTO employeeDTO=new EmployeeDTO();
@@ -35,7 +37,7 @@ public class EmployeeMapper {
         }
         return employeeDTOS;
     }
-    public static List<Employee> dtoToEntityList(List<EmployeeDTO> employeeDTOS){
+    public List<Employee> dtoToEntityList(List<EmployeeDTO> employeeDTOS){
         List<Employee> employees=new ArrayList<>();
         for (EmployeeDTO employeeDTO:employeeDTOS) {
             Employee employee=new Employee();

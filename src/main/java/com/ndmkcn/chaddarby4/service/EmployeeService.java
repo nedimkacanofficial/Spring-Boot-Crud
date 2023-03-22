@@ -15,23 +15,24 @@ import java.util.Optional;
 @AllArgsConstructor
 public class EmployeeService {
     private final EmployeeRepository employeeRepository;
+    private final EmployeeMapper employeeMapper;
     public List<EmployeeDTO> findAll(){
         List<Employee> employees=employeeRepository.findAll();
-        return EmployeeMapper.entityToDTOList(employees);
+        return employeeMapper.entityToDTOList(employees);
     }
     public EmployeeDTO findById(Long id){
         Optional<Employee> employee=employeeRepository.findById(id);
         if (employee.isPresent()){
             Employee employee1=employee.get();
-            return EmployeeMapper.entityToDTO(employee1);
+            return employeeMapper.entityToDTO(employee1);
         } else {
             throw new NotFoundException("Belirtilen Id değerine sahip çalışan bulunamadı ! - " + id);
         }
     }
     public EmployeeDTO save(EmployeeDTO employeeDTO){
-        Employee employee=EmployeeMapper.dtoToEntity(employeeDTO);
+        Employee employee=employeeMapper.dtoToEntity(employeeDTO);
         Employee savedEmployee=employeeRepository.save(employee);
-        return EmployeeMapper.entityToDTO(savedEmployee);
+        return employeeMapper.entityToDTO(savedEmployee);
     }
     public EmployeeDTO update(EmployeeDTO employeeDTO,Long id){
         Optional<Employee> optionalEmployee=employeeRepository.findById(id);
@@ -41,7 +42,7 @@ public class EmployeeService {
             employee.setLastName(employeeDTO.getLastName());
             employee.setEmail(employeeDTO.getEmail());
             Employee updateEmployee=employeeRepository.save(employee);
-            return EmployeeMapper.entityToDTO(updateEmployee);
+            return employeeMapper.entityToDTO(updateEmployee);
         } else {
             throw new NotFoundException("Belirtilen Id değerine sahip çalışan bulunamadı ! - " + id);
         }
